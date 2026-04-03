@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,3 +18,8 @@ spec:
           image: grafana/grafana:main-ubuntu
           ports:
             - containerPort: 3000
+          env:
+            - name: GF_SECURITY_ADMIN_USER
+              value: grafana
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: grafana@123
