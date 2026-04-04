@@ -1,8 +1,8 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana
+  name: grafana-demo
+  namespace: monitoring
 spec:
   replicas: 1
   selector:
@@ -23,3 +23,17 @@ spec:
               value: grafana
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: grafana@123
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-demo
+  namespace: monitoring
+spec:
+  selector:
+    app: grafana-demo
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP
